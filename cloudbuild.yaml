@@ -1,16 +1,16 @@
 steps:
 # Docker Build on Cloud Build
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/authentic-lotus-394014/falopez-cymbal-coffee-dotnet/cymbalcoffee:$SHORT_SHA', '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/authentic-lotus-394014/working/cymbalcoffee:$SHORT_SHA', '.']
  
 # Docker Push to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/authentic-lotus-394014/falopez-cymbal-coffee-dotnet/cymbalcoffee:$SHORT_SHA'] 
+  args: ['push', 'us-central1-docker.pkg.dev/authentic-lotus-394014/working/cymbalcoffee:$SHORT_SHA'] 
 
 # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'falopez-cymbal-coffee-dotnet',
-    '--image', 'us-central1-docker.pkg.dev/authentic-lotus-394014/falopez-cymbal-coffee-dotnet/cymbalcoffee:$SHORT_SHA',
+  args: ['run', 'deploy', 'working',
+    '--image', 'us-central1-docker.pkg.dev/authentic-lotus-394014/working/cymbalcoffee:$SHORT_SHA',
     '--region', 'us-central1',
     '--platform', 'managed',
     '--allow-unauthenticated',
